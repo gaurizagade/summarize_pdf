@@ -1,0 +1,48 @@
+{% extends "upload.html" %} 
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+  {% block head %}
+  <head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" type="text/css" href="{% static 'show.css' %}">
+    {% block title %}
+      <title>Summary Text</title>
+    {% endblock title %}
+  </head>
+  {% endblock head %}
+  <body>
+    {% block content %}
+    <div class="container">
+        <h2 class="center"> Summary </h2>
+        <!-- Notification Container -->
+        <!-- <div class="notification-container">
+          {% for message in messages %}
+              <div class="notification {% if message.tags == 'success' %}success{% elif message.tags == 'error' %}error{% endif %}">
+                  {{ message }}
+              </div>
+          {% endfor %}
+        </div> -->
+        <form method="post" >
+          {% csrf_token %}
+          <textarea name="pdf_file" rows="10" readonly>{{ summary }}</textarea>
+          
+        </form>
+        <br>
+    </div>
+    {% endblock %}
+    {% block script %}
+    <script>
+        // Automatically close notifications after 5 seconds
+        document.addEventListener('DOMContentLoaded', function () {
+          var textSection = document.querySelector('.container');
+            if (textSection) {
+                textSection.scrollIntoView({ behavior: 'smooth' });
+            }
+        });
+    </script>
+    {% endblock script %}
+  </body>
+</html>
